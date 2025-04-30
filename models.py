@@ -3,9 +3,9 @@ from typing import Annotated
 
 class Hero(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    name: str
+    name: str = Field(..., title="Hero name", max_length=100, index=True)
     secret_name: str
-    age: int | None = None
+    age: int | None = Field(default=None, index=True)
 
 class HeroCreate(SQLModel): # Same as HeroDTO in Java Spring Boot
     name: Annotated[str, Field(..., title="Hero name", max_length=100)]
