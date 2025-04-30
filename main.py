@@ -50,3 +50,21 @@ async def create_hero(
     session.commit()
     session.refresh(hero)
     return {"message": "Hero created", "hero": hero_dto}
+
+@app.put("/heroes/{hero_id}")
+async def update_hero(
+        hero_dto: HeroCreate,
+        hero_id: int = Path(..., title="The ID of the hero to update"),
+        session: Session = Depends(get_session)
+):
+    hero = session.get(Hero, hero_id)
+    if not hero:
+        raise HTTPException(status_code=404, detail="Hero not found")
+    hero.name = hero_dto.name
+    hero.secret_name = hero_dto.secret_name
+    hero.age = hero_dto.age
+    session.add(hero)
+    session.commit()
+    session.refresh(hero)
+    # Here you would typically update the hero in the database
+    return {"message": "Hero updated", "hero": hero}
