@@ -1,7 +1,4 @@
-from typing import List
-
 from sqlmodel import Field, SQLModel, Relationship
-
 
 class Team(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -9,6 +6,7 @@ class Team(SQLModel, table=True):
     headquarters: str = Field(
         ..., title="Headquarters location", max_length=100
     )
+    heroes: list["Hero"] = Relationship(back_populates="team")
 
 class TeamCreate(SQLModel):
     name: str = Field(..., title="Team name", max_length=100)
