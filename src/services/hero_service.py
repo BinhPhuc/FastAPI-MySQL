@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 
-from models.hero import Hero, HeroCreate
-from services.hero_service_interface import HeroServiceInterface
+from src.models.hero import Hero, HeroCreate
+from src.services.hero_service_interface import HeroServiceInterface
 
 class HeroService(HeroServiceInterface):
     def get_hero(self, hero_id: int, session: Session):

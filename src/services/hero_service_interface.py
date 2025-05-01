@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from sqlmodel import Session
 
-from models.hero import HeroCreate
+from src.models.hero import HeroCreate
 
 class HeroServiceInterface(ABC):
     @abstractmethod
