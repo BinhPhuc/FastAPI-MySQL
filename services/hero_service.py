@@ -6,6 +6,8 @@ from services.hero_service_interface import HeroServiceInterface
 class HeroService(HeroServiceInterface):
     def get_hero(self, hero_id: int, session: Session):
         hero = session.get(Hero, hero_id)
+        if not hero:
+            return None
         return hero
 
     def get_all_heroes(self, session: Session):

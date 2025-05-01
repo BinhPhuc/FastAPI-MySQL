@@ -55,4 +55,6 @@ async def update_hero(
         session: Session = Depends(get_session)
 ):
     hero = hero_service.update_hero(hero_id, hero_dto, session)
+    if not hero:
+        raise HTTPException(status_code=404, detail="Hero not found")
     return {"message": "Hero updated", "hero": hero}
